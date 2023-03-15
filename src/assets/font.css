@@ -1,0 +1,25 @@
+/* CDN 服务仅供平台体验和调试使用，平台不承诺服务的稳定性，企业客户需下载字体包自行发布使用并做好备份。 */
+@font-face {
+  font-family: 'webfont';
+  font-weight: 500;
+  src: url("./font/zy.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: 'webfont1';
+  font-weight: 500;
+  src: url("./font/kt.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: 'webfont2';
+  font-weight: 500;
+  src: url("./font/syht2.otf") format("opentype");
+  font-display: swap;
+}
+@font-face {
+  font-family: 'webfont3';
+  font-weight: 500;
+  src: url("./font/sx7.ttf") format("truetype");
+  font-display: swap;
+}
