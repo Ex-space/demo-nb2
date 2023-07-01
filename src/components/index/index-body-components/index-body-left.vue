@@ -129,7 +129,7 @@ export default {
         page_num: 1
       }
     }).then(res => {
-      this.articleList = res.data.data.list
+      this.articleList = res.data.data.list.slice(0,5)
       var i
       var reg = /[\u4E00-\u9FA5\w]+/g
       for (i = 0; i < this.articleList.length; i++) {
@@ -189,7 +189,8 @@ export default {
         page_num: index
       }
     }).then(res => {
-      this.articleList = res.data.data.list
+      this.articleList = res.data.data.list.slice((index-1)*5,index*5)
+      console.log(this.articleList);
       if(this.articleList.length<5){
         this.$store.state.articleNumber.fixFlag=false
       }else{

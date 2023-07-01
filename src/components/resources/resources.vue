@@ -4,11 +4,17 @@
     <normalHeader></normalHeader>
     <div class="bkimg">
       <div class="container">
-        <div class="item active" style="background-image: url(./statics/j1.jpg);">
+        <div
+          class="item active"
+          style="background-image: url(./statics/j1.jpg)"
+        >
           <div class="shadow"></div>
           <div class="content">
             <div class="icon">
-              <span class="iconfont icon-B" style="font-weight:600;font-size:42px"></span>
+              <span
+                class="iconfont icon-B"
+                style="font-weight: 600; font-size: 42px"
+              ></span>
             </div>
             <div class="text">
               <div class="tit">我的云盘</div>
@@ -18,13 +24,14 @@
             </div>
           </div>
         </div>
-        <div class="item" style="background-image: url(./statics/j2.jpg);">
+        <div class="item" style="background-image: url(./statics/j2.jpg)">
           <div class="shadow"></div>
           <div class="content">
             <div class="icon">
-
-              <span class="iconfont icon-swticondianying
-      " style="font-size:34px ;"></span>
+              <span
+                class="iconfont icon-swticondianying"
+                style="font-size: 34px"
+              ></span>
             </div>
             <div class="text">
               <div class="tit">爱电影</div>
@@ -34,12 +41,14 @@
             </div>
           </div>
         </div>
-        <div class="item" style="background-image: url(./statics/j3.jpg);">
+        <div class="item" style="background-image: url(./statics/j3.jpg)">
           <div class="shadow"></div>
           <div class="content">
             <div class="icon">
-
-              <span class="iconfont icon-dongman" style="font-size:42px ;"></span>
+              <span
+                class="iconfont icon-dongman"
+                style="font-size: 42px"
+              ></span>
             </div>
             <div class="text">
               <div class="tit">爱动漫</div>
@@ -49,12 +58,11 @@
             </div>
           </div>
         </div>
-        <div class="item" style="background-image: url(./statics/j4.jpg);">
+        <div class="item" style="background-image: url(./statics/j4.jpg)">
           <div class="shadow"></div>
           <div class="content">
             <div class="icon">
-
-              <span class="iconfont icon-yinle1" style="font-size:38px ;"></span>
+              <span class="iconfont icon-yinle1" style="font-size: 38px"></span>
             </div>
             <div class="text">
               <div class="tit">爱音乐</div>
@@ -64,12 +72,14 @@
             </div>
           </div>
         </div>
-        <div class="item" style="background-image: url(./statics/j5.jpg);">
+        <div class="item" style="background-image: url(./statics/j5.jpg)">
           <div class="shadow"></div>
           <div class="content">
             <div class="icon">
-
-              <span class="iconfont icon-weibiaoti--" style="font-size:34px ;"></span>
+              <span
+                class="iconfont icon-weibiaoti--"
+                style="font-size: 34px"
+              ></span>
             </div>
             <div class="text">
               <div class="tit">爱读书</div>
@@ -79,12 +89,11 @@
             </div>
           </div>
         </div>
-        <div class="item" style="background-image: url(./statics/j6.jpg);">
+        <div class="item" style="background-image: url(./statics/j6.jpg)">
           <div class="shadow"></div>
           <div class="content">
             <div class="icon">
-
-              <span class="iconfont icon-youxi" style="font-size:38px ;"></span>
+              <span class="iconfont icon-youxi" style="font-size: 38px"></span>
             </div>
             <div class="text">
               <div class="tit">爱游戏</div>
@@ -94,12 +103,14 @@
             </div>
           </div>
         </div>
-        <div class="item" style="background-image: url(./statics/j7.jpg);">
+        <div class="item" style="background-image: url(./statics/j7.jpg)">
           <div class="shadow"></div>
           <div class="content">
             <div class="icon">
-
-              <span class="iconfont icon-shenghuo" style="font-size:48px ;"></span>
+              <span
+                class="iconfont icon-shenghuo"
+                style="font-size: 48px"
+              ></span>
             </div>
             <div class="text">
               <div class="tit">爱人生</div>
@@ -115,17 +126,20 @@
       <div class="container self">
         <div class="headTip">
           <span>名称</span>
-          <span style="float:right;margin-right: 132px;">修改时间</span>
-          <span style="float:right;margin-right: 268px;">大小</span>
+          <span>修改时间</span>
+          <span>大小</span>
         </div>
         <div class="content1" v-for="item in resourcesList" :key="item.id">
-          <span class="iconfont icon-ziyuan"></span>
-          <span class="title">{{ item.title }}</span>
-          <span class="size">{{ item.size }}</span>
+          <span class="title">
+            <span class="iconfont icon-ziyuan"></span>
+            {{ item.title }}
+          </span>
           <span class="time">{{ item.updated_at }}</span>
-          <router-link :to="item.url">
-            <span class="iconfont icon-xiazai"></span>
-          </router-link>
+          <span class="size">{{ item.size }}</span>
+          <span
+            class="iconfont icon-xiazai"
+            @click="downloadFile(item.url, item.title)"
+          ></span>
         </div>
       </div>
       <div class="noProblem self">
@@ -142,50 +156,57 @@
 </template>
 
 <script>
-import normalHeader from '@/components/normalize/normalize-head.vue'
-import normalFooter from '@/components/normalize/normalize-footer.vue'
+import normalHeader from "@/components/normalize/normalize-head.vue";
+import normalFooter from "@/components/normalize/normalize-footer.vue";
 export default {
   data() {
     return {
       waterFlag: true,
       flag: true,
-      bkimg: './statics/1.jpeg',
-      resourcesList: [
-        { id: 1, picture: './statics/1.jpeg', title: '小白云盘TV_v1.5.1beta.apk', size: '28.88M', created_at: '2023-02-15 10:45:57' },
-        { id: 2, picture: './statics/1.jpeg', title: '小白云盘TV_v1.5.1beta.apk', size: '28.88M', created_at: '2023-02-15 10:45:57' },
-        { id: 3, picture: './statics/1.jpeg', title: '小白云盘对比哦亲hdiqhidbiqhwiodhwhidwqdhoiqhwddhwqioqdwhwdqhoiTV_v1.5.1beta.apk', size: '28.88M', created_at: '2023-02-15 10:45:57' },
-        { id: 4, picture: './statics/1.jpeg', title: '小白云盘TV_v1.5.1beta.apk', size: '28.88M', created_at: '2023-02-15 10:45:57' },
-        { id: 5, picture: './statics/1.jpeg', title: '小白云盘TV_v1.5.1beta.apk', size: '28.88M', created_at: '2023-02-15 10:45:57' },
-        { id: 6, picture: './statics/1.jpeg', title: '小白云盘TV_v1.5.1beta.apk', size: '28.88M', created_at: '2023-02-15 10:45:57' },
-        { id: 7, picture: './statics/1.jpeg', title: '小白云盘TV_v1.5.1beta.apk', size: '28.88M', created_at: '2023-02-15 10:45:57' },
-        { id: 8, picture: './statics/1.jpeg', title: '小白云盘TV_v1.5.1beta.apk', size: '28.88M', created_at: '2023-02-15 10:45:57' },
-      ],
+      bkimg: "./statics/1.jpeg",
+      resourcesList: [],
       ruleList: [
-        { id: 1, content: '因不可抗力、网络状况、通讯线路、第三方网站、设备故障等任何原因而导致您不能正常使用，我们不做任何承诺，不承担任何责任。' },
-        { id: 2, content: '云盘将严格遵守国家法律，如您发现下载内容引发您的不适或者低俗可以通过邮件联系我们，我们将在看到邮件后第一时间做出调整。' },
-        { id: 3, content: '云盘内容如果涉及侵权，非法转载。请通过邮件联系我们，我们将第一时间做出调整。' },
-        { id: 4, content: '本站为免费分享资源，云盘下载内容请勿作为商用。如有非法转载，我们将追究法律责任。' },
-      ]
+        {
+          id: 1,
+          content:
+            "因不可抗力、网络状况、通讯线路、第三方网站、设备故障等任何原因而导致您不能正常使用，我们不做任何承诺，不承担任何责任。",
+        },
+        {
+          id: 2,
+          content:
+            "云盘将严格遵守国家法律，如您发现下载内容引发您的不适或者低俗可以通过邮件联系我们，我们将在看到邮件后第一时间做出调整。",
+        },
+        {
+          id: 3,
+          content:
+            "云盘内容如果涉及侵权，非法转载。请通过邮件联系我们，我们将第一时间做出调整。",
+        },
+        {
+          id: 4,
+          content:
+            "本站为免费分享资源，云盘下载内容请勿作为商用。如有非法转载，我们将追究法律责任。",
+        },
+      ],
     };
   },
 
   components: {
     normalHeader,
-    normalFooter
+    normalFooter,
   },
   async created() {
-    await this.$http.get(
-      `/netdisk/list`, {}).then(res => {
-        console.log(res.data.data);
-      this.resourcesList=res.data.data
-    }).catch(Error => {
-    })
+    await this.$http
+      .get(`/netdisk/list`, {})
+      .then((res) => {
+        this.resourcesList = res.data.data;
+      })
+      .catch((Error) => {});
   },
   computed: {},
   mounted() {
     // 获取所有.item元素
-    let items = document.querySelectorAll('.item');
-    var self = this
+    let items = document.querySelectorAll(".item");
+    var self = this;
 
     // 设置选中态样式
     function setActive() {
@@ -193,32 +214,63 @@ export default {
         self.waterFlag = false;
         setTimeout(() => {
           self.waterFlag = true;
-        }, 1000)
+        }, 1000);
         // 遍历所有.item元素，移出active样式
         items.forEach((item) => {
-          item.classList.remove('active');
-        })
+          item.classList.remove("active");
+        });
         // 为当前选中项添加active样式
-        this.classList.add('active');
+        this.classList.add("active");
       }
     }
     // 遍历所有.item元素，分别为其设置点击事件
     items.forEach((item) => {
-      item.addEventListener('click', setActive);
-    })
+      item.addEventListener("click", setActive);
+    });
   },
   methods: {
-
-  }
-}
-
+    downloadUrlFile(url) {
+      window.open(url);
+      // let tempForm = document.createElement("form");
+      // tempForm.action = url;
+      // tempForm.method = "get";
+      // tempForm.style.display = "none";
+      // document.body.appendChild(tempForm);
+      // tempForm.submit();
+      // return tempForm;
+    },
+    async downloadFile(url, fileName) {
+      const url2 = url.replaceAll(/\\/g, "/");
+      const xhr = new XMLHttpRequest();
+      xhr.open("GET", url2, true);
+      xhr.responseType = "blob";
+      xhr.onload = () => {
+        if (xhr.status === 200) {
+          this.saveAs(xhr.response, fileName);
+        }
+      };
+      xhr.send();
+    },
+    saveAs(data, name) {
+      const urlObj = window.URL || window.webkitURL || window;
+      const export_blob = new Blob([data]);
+      const save_link = document.createElement("a");
+      const href = urlObj.createObjectURL(export_blob);
+      save_link.href = href;
+      save_link.download = name;
+      document.body.appendChild(save_link);
+      save_link.click();
+      document.body.removeChild(save_link);
+      window.URL.revokeObjectURL(href);
+    },
+  },
+};
 </script>
-<style lang='less' scoped>
+<style lang="less" scoped>
 @keyframes all {
   from {
     opacity: 0;
     transform: translateY(-200px);
-
   }
 
   to {
@@ -240,7 +292,6 @@ export default {
 .resources-container {
   animation: all 1s;
 
-
   @keyframes img {
     20% {
       opacity: 0;
@@ -254,11 +305,9 @@ export default {
   }
 
   .bkimg {
-
     width: 100%;
     height: 500px;
     overflow: hidden;
-
 
     .container {
       animation: img 1s alternate;
@@ -310,7 +359,7 @@ export default {
     @keyframes icon {
       50% {
         opacity: 0;
-        transform: scale(.2);
+        transform: scale(0.2);
       }
 
       to {
@@ -326,7 +375,7 @@ export default {
       width: 80px;
       height: 80px;
       transform: translateY(50%);
-      background-color: rgba(255, 255, 255, .4);
+      background-color: rgba(255, 255, 255, 0.4);
       display: flex;
       backdrop-filter: blur(5.5px);
       justify-content: center;
@@ -335,7 +384,7 @@ export default {
 
       .iconfont {
         animation: icon 1.5s;
-        transition: all .3s;
+        transition: all 0.3s;
         color: #333;
         font-size: 30px;
       }
@@ -343,7 +392,7 @@ export default {
 
     @keyframes subtxt {
       20% {
-        opacity: .4;
+        opacity: 0.4;
         transform: translateX(200px);
       }
 
@@ -355,7 +404,7 @@ export default {
 
     @keyframes tit {
       20% {
-        opacity: .4;
+        opacity: 0.4;
         transform: translateY(-180px);
       }
 
@@ -389,7 +438,7 @@ export default {
       // overflow: hidden;
       // white-space: nowrap;
       opacity: 0;
-      transition: opacity .1s ease-out;
+      transition: opacity 0.1s ease-out;
     }
 
     .item .content .text .tit {
@@ -403,14 +452,14 @@ export default {
       animation: subtxt 1.5s alternate;
       font-size: 14px;
       font-weight: 500;
-      transform: scale(.5);
+      transform: scale(0.5);
       /* 设置过渡效果延迟时间 */
       transition-delay: 0.2s;
     }
 
     /* 选中态样式 */
     .item.active {
-      flex: 1
+      flex: 1;
     }
 
     .item.active .icon {
@@ -425,7 +474,12 @@ export default {
 
     .item.active .shadow {
       transition: 1s cubic-bezier(0.05, 0.61, 0.41, 0.95);
-      background: linear-gradient(to top, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.25)40%, transparent);
+      background: linear-gradient(
+        to top,
+        rgba(255, 255, 255, 0.85),
+        rgba(255, 255, 255, 0.25) 40%,
+        transparent
+      );
       height: 100%;
     }
 
@@ -446,7 +500,7 @@ export default {
 
     .item.active .content .text .tit {
       transform: translateY(0px);
-      transition-delay: .5s;
+      transition-delay: 0.5s;
       // transition: 1s cubic-bezier(0.05, 0.61, 0.41, 0.95);
       opacity: 1;
     }
@@ -468,7 +522,7 @@ export default {
   @keyframes container {
     from {
       opacity: 0;
-      transform: scale(.4) translate(900px);
+      transform: scale(0.4) translate(900px);
     }
 
     to {
@@ -480,7 +534,7 @@ export default {
   @keyframes problem {
     from {
       opacity: 0;
-      transform: scale(.4) translate(-900px);
+      transform: scale(0.4) translate(-900px);
     }
 
     to {
@@ -500,49 +554,55 @@ export default {
       border-bottom: 1px solid #ccc;
       font-size: 16px;
       font-weight: 600;
+      display: grid;
+      grid-template-columns: 18fr 4fr 2fr;
       padding-bottom: 5px;
       color: rgb(147, 147, 147);
     }
 
     .content1 {
-      display: flex;
+      display: grid;
+      grid-template-columns: 36fr 8fr 3fr 1fr;
+      grid-template-areas: "center";
+      justify-content: center;
       align-items: center;
-      transition: all .5s;
+      // align-items: center;
+      transition: all 0.5s;
       height: 35px;
       margin: 5px 0;
       // background-color: pink;
       border-radius: 4px;
 
       .icon-ziyuan {
-        color: #409EFF;
+        color: #409eff;
         font-size: 18px;
-        margin: 0 10px;
+        // margin: 0 10px;
+        margin-right: 3px;
         -webkit-transform: scaleX(1.2);
         -moz-transform: scaleX(1.2);
         -o-transform: scaleX(1.2);
         transform: scaleX(1.3);
-
       }
 
       .title {
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-        width: 453px;
+        // width: 453px;
         font-size: 13px;
         font-weight: 500;
       }
 
       .size {
-        width: 300px;
-        margin-left: 50px;
+        // width: 300px;
+        // margin-left: 50px;
       }
 
       .icon-xiazai {
-        margin-left: 30px;
+        // margin-left: 30px;
         font-size: 20px;
         cursor: pointer;
-        color: #409EFF;
+        color: #409eff;
         font-weight: 600;
       }
     }
@@ -563,15 +623,15 @@ export default {
     .head {
       margin-bottom: 10px;
       position: relative;
-      transition: all .5s;
+      transition: all 0.5s;
       color: rgb(147, 147, 147);
       font-weight: 600;
       font-size: 24px;
     }
 
     .head::after {
-      content: '';
-      transition: all .5s;
+      content: "";
+      transition: all 0.5s;
       position: absolute;
       left: 0;
       bottom: -2px;
@@ -589,7 +649,7 @@ export default {
       width: 95.5px;
       height: 3px;
       border-radius: 1px;
-      background-color: #409EFF;
+      background-color: #409eff;
     }
 
     .body {

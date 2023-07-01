@@ -11,7 +11,12 @@
             </i-switch>
           </Form-item>
           <Form-item label="自动切换间隔">
-            <Slider v-model="setting.autoplaySpeed" :min="300" :max="10000" :step="100"></Slider>
+            <Slider
+              v-model="setting.autoplaySpeed"
+              :min="300"
+              :max="10000"
+              :step="100"
+            ></Slider>
           </Form-item>
           <Form-item label="指示器位置">
             <Radio-group v-model="setting.dots" type="button">
@@ -34,18 +39,24 @@
             </Radio-group>
           </Form-item>
         </Form>
-        <div class="triangle">
-        </div>
+        <div class="triangle"></div>
       </div>
     </transition>
     <div class="title">
       <slot name="title"></slot>
     </div>
-    <Carousel class="carousel" v-model="value3" :autoplay="setting.autoplay" :autoplay-speed="setting.autoplaySpeed"
-      :dots="setting.dots" :trigger="setting.trigger" :arrow="setting.arrow">
+    <Carousel
+      class="carousel"
+      v-model="value3"
+      :autoplay="setting.autoplay"
+      :autoplay-speed="setting.autoplaySpeed"
+      :dots="setting.dots"
+      :trigger="setting.trigger"
+      :arrow="setting.arrow"
+    >
       <Carousel-item v-for="item in imgList" :key="item">
         <div class="demo-carousel">
-          <el-image :src=item id="bannerImg" class="img4">
+          <el-image :src="item" id="bannerImg" class="img4">
             <div class="loader" slot="placeholder">
               <div class="load"></div>
             </div>
@@ -66,37 +77,35 @@
 export default {
   data() {
     return {
-      height: '600px',
+      height: "600px",
       toggleVisible: false,
-      imgList: [
-      ],
+      imgList: [],
       value3: 0,
       setting: {
         autoplay: true,
         autoplaySpeed: 4000,
-        dots: 'inside',
-        trigger: 'hover',
-        arrow: 'hover'
-      }
-    }
+        dots: "inside",
+        trigger: "hover",
+        arrow: "hover",
+      },
+    };
   },
   async created() {
-    await this.$http.get(
-      `/carousel`, {
-    }).then(res => {
-      this.imgList = res.data.data
-    }).catch(Error => {
-    })
+    await this.$http
+      .get(`/carousel`, {})
+      .then((res) => {
+        this.imgList = res.data.data;
+      })
+      .catch((Error) => {});
   },
   methods: {
     changeVisible() {
-      this.toggleVisible = !this.toggleVisible
-    }
-  }
-}
-
+      this.toggleVisible = !this.toggleVisible;
+    },
+  },
+};
 </script>
-<style lang='less' scoped>
+<style lang="less" scoped>
 .img4 {
   width: 100%;
   height: 100%;
@@ -107,21 +116,19 @@ export default {
     height: 100%;
     background-color: rgb(81, 81, 81);
   }
-
 }
 .slide-fade-enter-active {
-  transition: all .5s ease;
+  transition: all 0.5s ease;
 }
 
 .slide-fade-leave-active {
-  transition: all .4s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  transition: all 0.4s cubic-bezier(1, 0.5, 0.8, 1);
 }
 
 .slide-fade-enter,
 .slide-fade-leave-to
 
-/* .slide-fade-leave-active for below version 2.1.8 */
-  {
+/* .slide-fade-leave-active for below version 2.1.8 */ {
   transform: translateX(-10px);
   opacity: 0;
 }
@@ -130,7 +137,6 @@ export default {
   from {
     opacity: 0;
     transform: translate(-50%, -50%) scale(0);
-
   }
 
   to {
@@ -195,7 +201,7 @@ export default {
 
     .iconfont {
       font-size: 26px;
-      color: #409EFF;
+      color: #409eff;
       animation: rotate 8s infinite linear;
     }
 
@@ -215,27 +221,30 @@ export default {
     box-shadow: 3px 3px 12px -2px #ccc;
     background-color: #fff;
     border-radius: 8px;
+    border: 0;
   }
 
   .setting {
-    z-index: 10;
+    z-index: 10000;
     position: absolute;
     left: 90px;
     top: 383px;
     width: 500px;
+    border: 0;
 
     .triangle {
       position: absolute;
-      left: -20px;
+      display: inline-block;
+      left: -18px;
       top: 50%;
       transform: translateY(-50%);
       height: 0px;
       width: 0px;
-      border: 10px solid #000;
+      border: 10px solid #fff;
       border-left-color: transparent;
       border-top-color: transparent;
       border-bottom-color: transparent;
-      border-right-color: #fff;
+      // border-right-color: #fff;
     }
   }
 

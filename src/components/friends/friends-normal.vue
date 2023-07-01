@@ -5,16 +5,22 @@
       <div class="title">Link to my friend's blog</div>
       <div class="noProblem">友链随机排列，无有意排序之意！</div>
       <div class="carousel">
-        <el-carousel :interval="4000" :initial-index="randomShow" indicator-positio="none" type="card" height="150px"
-          indicator-position="inside">
+        <el-carousel
+          :interval="4000"
+          :initial-index="randomShow"
+          indicator-positio="none"
+          type="card"
+          height="150px"
+          indicator-position="inside"
+        >
           <el-carousel-item v-for="item in friendsList" :key="item.id">
             <a :href="getURL(item.address)" class="friend self" target="_blank">
-              <el-image :src=item.avatar class="img2" lazy>
+              <el-image :src="item.avatar" class="img2" lazy>
                 <div class="loader" slot="placeholder">
                   <div class="load"></div>
                 </div>
                 <div slot="error" class="image-slot error">
-                  <el-empty description="" :image-size=30></el-empty>
+                  <el-empty description="" :image-size="30"></el-empty>
                 </div>
               </el-image>
               <div class="context">
@@ -28,11 +34,17 @@
       <div class="all">
         <div class="d1">
           <div class="subtitle">申请友链自助</div>
-          <button @click="goSubmit"><span class="text">点击申请</span><span>Welcome!</span></button>
+          <button @click="goSubmit">
+            <span class="text">点击申请</span><span>Welcome!</span>
+          </button>
         </div>
         <div class="requirement d2">
           <div class="subtitle1">友链申请说明</div>
-          <div class="requireContext" v-for="item in requirementList" :key="item.id">
+          <div
+            class="requireContext"
+            v-for="item in requirementList"
+            :key="item.id"
+          >
             {{ item.id }}. {{ item.content }}
           </div>
         </div>
@@ -50,52 +62,55 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import copyright from '@/components/normalize/normalize-copyright.vue'
+import { mapState } from "vuex";
+import copyright from "@/components/normalize/normalize-copyright.vue";
 export default {
   data() {
     return {
       randomShow: 0,
-      webname: '',
-      webintroduce: '',
-      webicon: '',
+      webname: "",
+      webintroduce: "",
+      webicon: "",
       requirementList: [],
       friendsList: [],
     };
   },
 
   components: {
-    copyright
+    copyright,
   },
   created() {
-    this.$http.get(
-      '/friend-link/list', {
-    }).then(res => {
-      this.webname = res.data.data.example_name
-      this.webintroduce = res.data.data.example_intro
-      this.webicon = res.data.data.example_avatar
-      this.requirementList = res.data.data.requirement
-      this.friendsList = res.data.data.friend_link_list
-
-    }).catch(Error => {
-      this.$Notice.error({
-        title: '服务器请求繁忙！',
-        desc: '很抱歉给您带来的不便，但是服务器也是会累的哦！检查一下网络状态是否良好再试试吧'
+    this.$http
+      .get("/friend-link/list", {})
+      .then((res) => {
+        this.webname = res.data.data.example_name;
+        this.webintroduce = res.data.data.example_intro;
+        this.webicon = res.data.data.example_avatar;
+        this.requirementList = res.data.data.requirement;
+        this.friendsList = res.data.data.friend_link_list;
       })
-    })
+      .catch((Error) => {
+        this.$Notice.error({
+          title: "服务器请求繁忙！",
+          desc: "很抱歉给您带来的不便，但是服务器也是会累的哦！检查一下网络状态是否良好再试试吧",
+        });
+      });
   },
   mounted() {
-    this.randomShow = Math.floor(Math.random() * this.friendsList.length)
+    this.randomShow = Math.floor(Math.random() * this.friendsList.length);
   },
   computed: {
-    ...mapState('me', ['weburl']),
-    ...mapState('component', ['componentName'])
+    ...mapState("me", ["weburl"]),
+    ...mapState("component", ["componentName"]),
   },
 
   methods: {
     getURL(url) {
       let strURL = "";
-      if (url.substr(0, 7).toLowerCase() == "http://" || url.substr(0, 8).toLowerCase() == "https://") {
+      if (
+        url.substr(0, 7).toLowerCase() == "http://" ||
+        url.substr(0, 8).toLowerCase() == "https://"
+      ) {
         strURL = url;
       } else {
         strURL = "http://" + url;
@@ -103,13 +118,12 @@ export default {
       return strURL;
     },
     goSubmit() {
-      this.$store.state.component.componentName = 'submit'
-    }
-  }
-}
-
+      this.$store.state.component.componentName = "submit";
+    },
+  },
+};
 </script>
-<style lang='less' scoped>
+<style lang="less" scoped>
 .normal-container {
   .img2 {
     position: relative;
@@ -148,7 +162,6 @@ export default {
       width: 100%;
       height: 100%;
 
-
       .load {
         display: inline-block;
         position: relative;
@@ -180,42 +193,50 @@ export default {
       @keyframes before8 {
         0% {
           width: 0.5em;
-          box-shadow: 1em -0.5em rgba(225, 20, 98, 0.75), -1em 0.5em rgba(111, 202, 220, 0.75);
+          box-shadow: 1em -0.5em rgba(225, 20, 98, 0.75),
+            -1em 0.5em rgba(111, 202, 220, 0.75);
         }
 
         35% {
           width: 2.5em;
-          box-shadow: 0 -0.5em rgba(225, 20, 98, 0.75), 0 0.5em rgba(111, 202, 220, 0.75);
+          box-shadow: 0 -0.5em rgba(225, 20, 98, 0.75),
+            0 0.5em rgba(111, 202, 220, 0.75);
         }
 
         70% {
           width: 0.5em;
-          box-shadow: -1em -0.5em rgba(225, 20, 98, 0.75), 1em 0.5em rgba(111, 202, 220, 0.75);
+          box-shadow: -1em -0.5em rgba(225, 20, 98, 0.75),
+            1em 0.5em rgba(111, 202, 220, 0.75);
         }
 
         100% {
-          box-shadow: 1em -0.5em rgba(225, 20, 98, 0.75), -1em 0.5em rgba(111, 202, 220, 0.75);
+          box-shadow: 1em -0.5em rgba(225, 20, 98, 0.75),
+            -1em 0.5em rgba(111, 202, 220, 0.75);
         }
       }
 
       @keyframes after6 {
         0% {
           height: 0.5em;
-          box-shadow: 0.5em 1em rgba(61, 184, 143, 0.75), -0.5em -1em rgba(233, 169, 32, 0.75);
+          box-shadow: 0.5em 1em rgba(61, 184, 143, 0.75),
+            -0.5em -1em rgba(233, 169, 32, 0.75);
         }
 
         35% {
           height: 2.5em;
-          box-shadow: 0.5em 0 rgba(61, 184, 143, 0.75), -0.5em 0 rgba(233, 169, 32, 0.75);
+          box-shadow: 0.5em 0 rgba(61, 184, 143, 0.75),
+            -0.5em 0 rgba(233, 169, 32, 0.75);
         }
 
         70% {
           height: 0.5em;
-          box-shadow: 0.5em -1em rgba(61, 184, 143, 0.75), -0.5em 1em rgba(233, 169, 32, 0.75);
+          box-shadow: 0.5em -1em rgba(61, 184, 143, 0.75),
+            -0.5em 1em rgba(233, 169, 32, 0.75);
         }
 
         100% {
-          box-shadow: 0.5em 1em rgba(61, 184, 143, 0.75), -0.5em -1em rgba(233, 169, 32, 0.75);
+          box-shadow: 0.5em 1em rgba(61, 184, 143, 0.75),
+            -0.5em -1em rgba(233, 169, 32, 0.75);
         }
       }
 
@@ -224,9 +245,7 @@ export default {
         top: calc(50% - 1.25em);
         left: calc(50% - 1.25em);
       }
-
     }
-
   }
 
   .self {
@@ -325,8 +344,8 @@ export default {
         margin-top: 15px;
         position: relative;
         overflow: hidden;
-        border: 1px solid #409EFF;
-        color: #409EFF;
+        border: 1px solid #409eff;
+        color: #409eff;
         display: inline-block;
         font-size: 15px;
         line-height: 15px;
@@ -368,7 +387,7 @@ export default {
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: #409EFF;
+        background-color: #409eff;
         transform-origin: bottom center;
         transition: transform 600ms cubic-bezier(0.48, 0, 0.12, 1);
         transform: skewY(9.3deg) scaleY(0);
@@ -394,11 +413,10 @@ export default {
         width: 130px;
         font-weight: 550;
         font-style: normal;
-
       }
 
       .subtitle::before {
-        content: '';
+        content: "";
         width: 0;
         display: inline-block;
         height: 3px;
@@ -422,11 +440,10 @@ export default {
           width: 130px;
           font-weight: 550;
           font-style: normal;
-
         }
 
         .subtitle1::before {
-          content: '';
+          content: "";
           width: 0;
           display: inline-block;
           height: 3px;
@@ -460,11 +477,10 @@ export default {
           width: 130px;
           font-weight: 550;
           font-style: normal;
-
         }
 
         .subtitle2::before {
-          content: '';
+          content: "";
           width: 0;
           display: inline-block;
           height: 3.5px;
@@ -483,9 +499,8 @@ export default {
     @keyframes change {
       50% {
         opacity: 0;
-        transform: scale(.4);
+        transform: scale(0.4);
       }
-
 
       100% {
         opacity: 1;
@@ -513,8 +528,8 @@ export default {
       background-color: rgba(196, 196, 196, 0.7);
       height: 150px;
 
-    .img2 {
-        transition: all .5s;
+      .img2 {
+        transition: all 0.5s;
         margin-left: 20px;
         width: 90px;
         height: 90px;
@@ -533,15 +548,19 @@ export default {
         font-weight: 600;
 
         .name {
-          font-size: 25px;
+          font-size: 23.5px;
+          line-height: 25px;
+          word-break: break-all;
         }
 
         .introduce {
           font-size: 14px;
+          margin-top: 6px;
+          word-break: break-all;
           font-weight: 500;
         }
       }
     }
   }
-
-}</style>
+}
+</style>

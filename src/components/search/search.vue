@@ -7,24 +7,41 @@
         <div class="modalheader">
           <form class="form">
             <label for="search">
-              <input class="input" type="text" required="" placeholder="请输入搜索内容" id="search" v-model="keyword"
-                @input="search">
+              <input
+                class="input"
+                type="text"
+                required=""
+                placeholder="请输入搜索内容"
+                id="search"
+                v-model="keyword"
+                @input="search"
+              />
               <div class="fancy-bg"></div>
               <div class="search" @click="search">
-                <svg viewBox="0 0 24 24" aria-hidden="true"
-                  class="r-14j79pv r-4qtqp9 r-yyyyoo r-1xvli5t r-dnmrzs r-4wgw6l r-f727ji r-bnwqim r-1plcrui r-lrvibr">
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  class="r-14j79pv r-4qtqp9 r-yyyyoo r-1xvli5t r-dnmrzs r-4wgw6l r-f727ji r-bnwqim r-1plcrui r-lrvibr"
+                >
                   <g>
                     <path
-                      d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z">
-                    </path>
+                      d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z"
+                    ></path>
                   </g>
                 </svg>
               </div>
               <button class="close-btn" type="reset" @click="clear">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd"
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
                     d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                    clip-rule="evenodd"></path>
+                    clip-rule="evenodd"
+                  ></path>
                 </svg>
               </button>
             </label>
@@ -32,96 +49,112 @@
         </div>
         <div class="scroll">
           <div class="modalfooter">
-            <div v-if="!noresult && !start" class="result">为您找到共{{ data.length }}篇文章</div>
+            <div v-if="!noresult && !start" class="result">
+              为您找到共{{ data.length }}篇文章
+            </div>
             <div class="noResult" v-if="start">输入关键词搜索你想要的文章</div>
-            <div v-if='noresult' class="noResult">很遗憾，没有匹配的搜索结果哦！</div>
-            <router-link :to="'/articles/' + item.id" class="context" :style="index === 0 ? noborder : ''"
-              v-for="(item, index) in data" :key="item.id">
-              <div class="title" v-html="item.highlight.title"  @click="closeModal()"></div>
-              <div class="content" v-html="item.highlight.content" @click="closeModal()"></div>
+            <div v-if="noresult" class="noResult">
+              很遗憾，没有匹配的搜索结果哦！
+            </div>
+            <router-link
+              :to="'/articles/' + item.id"
+              class="context"
+              :style="index === 0 ? noborder : ''"
+              v-for="(item, index) in data"
+              :key="item.id"
+            >
+              <div
+                class="title"
+                v-html="item.highlight.title"
+                @click="closeModal()"
+              ></div>
+              <div
+                class="content"
+                v-html="item.highlight.content"
+                @click="closeModal()"
+              ></div>
             </router-link>
           </div>
         </div>
-
       </div>
-      <div class="tips">
-        没有更多了~
-      </div>
+      <div class="tips">没有更多了~</div>
     </div>
 
-    <div class="backdrop">
-    </div>
+    <div class="backdrop"></div>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState } from "vuex";
 export default {
   data() {
     return {
       start: true,
       noresult: false,
-      noborder: 'border:none;',
+      noborder: "border:none;",
       data: [],
-      keyword: '',
+      keyword: "",
     };
   },
   components: {},
   mounted() {
-    let m = function (e) { e.preventDefault(); };
-    document.body.style.overflow = 'hidden';
-    document.addEventListener("touchmove", m, { passive: false });//禁止页面滑动
+    let m = function (e) {
+      e.preventDefault();
+    };
+    document.body.style.overflow = "hidden";
+    document.addEventListener("touchmove", m, { passive: false }); //禁止页面滑动
   },
   computed: {
-    ...mapState('modal', ['Visible'])
+    ...mapState("modal", ["Visible"]),
   },
   beforeDestroy() {
-    document.removeEventListener('keydown', this.close)
+    document.removeEventListener("keydown", this.close);
   },
   created() {
-    this.close = document.addEventListener('keydown', () => {
+    this.close = document.addEventListener("keydown", () => {
       if (window.event.keyCode === 27) {
-        this.closeModal()
+        this.closeModal();
+      } else if (window.event.keyCode === 13) {
+        this.search();
       }
-      else if (window.event.keyCode === 13) {
-        this.search()
-      }
-    })
+    });
   },
   methods: {
     clear() {
-      this.data = []
-      this.noresult = true
+      this.data = [];
+      this.noresult = true;
     },
     search() {
       this.$http({
-        method: 'post',
-        url: '/article/search',
+        method: "post",
+        url: "/article/search",
         data: {
-          "keyword": this.keyword
+          keyword: this.keyword,
         },
-      }).then(res => {
-        this.start = false
-        this.data = res.data.data
-        if (res.data.message === 'OK') {
-          this.noresult = false
-        } else {
-          this.noresult = true
-        }
-      }).catch(Error => {
       })
+        .then((res) => {
+          this.start = false;
+          this.data = res.data.data;
+          if (res.data.message === "OK") {
+            this.noresult = false;
+          } else {
+            this.noresult = true;
+          }
+        })
+        .catch((Error) => {});
     },
     closeModal() {
-      this.$store.state.modal.Visible = false
-      let m = function (e) { e.preventDefault(); };
-      document.body.style.overflow = '';//出现滚动条
+      this.$store.state.modal.Visible = false;
+      let m = function (e) {
+        e.preventDefault();
+      };
+      document.body.style.overflow = ""; //出现滚动条
       document.removeEventListener("touchmove", m, { passive: true });
-    }
-  }
-}
-
+    },
+  },
+};
 </script>
-<style lang='less' scoped>
+<style lang="less" scoped>
 .search-container {
   height: 100%;
   width: 100%;
@@ -130,7 +163,6 @@ export default {
     from {
       opacity: 0;
       transform: translate(-50%, -50%) scale(0.2);
-
     }
 
     to {
@@ -140,7 +172,7 @@ export default {
   }
 
   .modal {
-    animation: all .5s;
+    animation: all 0.5s;
     display: block;
     z-index: 100000;
     position: fixed;
@@ -167,7 +199,6 @@ export default {
       font-style: italic;
       font-size: 12px;
     }
-
 
     ::-webkit-scrollbar-track {
       height: 30px;
@@ -196,7 +227,6 @@ export default {
       background: #555;
     }
 
-
     .icon-guanbi {
       cursor: pointer;
       font-size: 12px;
@@ -210,7 +240,6 @@ export default {
 
       /* this is a recreation of twitter search in css */
       .form {
-
         --input-text-color: rgb(0, 0, 0);
         --input-bg-color: #ffffff;
         --focus-input-bg-color: transparent;
@@ -296,7 +325,10 @@ export default {
       .input {
         color: var(--input-text-color);
         width: 100%;
-        margin-inline: min(2em, calc(var(--inline-padding-of-input) + var(--gap)));
+        margin-inline: min(
+          2em,
+          calc(var(--inline-padding-of-input) + var(--gap))
+        );
         background: none;
         border: none;
       }
@@ -306,22 +338,22 @@ export default {
       }
 
       .input::placeholder {
-        color: var(--text-color)
+        color: var(--text-color);
       }
 
       /* input background change in focus */
-      .input:focus~.fancy-bg {
+      .input:focus ~ .fancy-bg {
         border: 1px solid var(--active-color);
         background: var(--focus-input-bg-color);
       }
 
       /* search icon color change in focus */
-      .input:focus~.search {
+      .input:focus ~ .search {
         fill: var(--active-color);
       }
 
       /* showing close button when typing */
-      .input:valid~.close-btn {
+      .input:valid ~ .close-btn {
         opacity: 1;
         visibility: visible;
       }
@@ -334,21 +366,23 @@ export default {
         -webkit-transition: "color 9999s ease-out, background-color 9999s ease-out";
         -webkit-transition-delay: 9999s;
       }
-
     }
 
     .scroll {
       margin: 20px auto;
-      width: 98%;
+      width: fit-content;
+      min-width: 400px;
       height: 380px;
       margin-top: 30px;
       margin-bottom: 20px;
       overflow-y: auto;
+      // overflow-x: hidden;
     }
 
     .modalfooter {
       transform: translateY(-3px);
-      width: 95%;
+      width: 100%;
+      max-width: 555px;
       height: 100%;
 
       .noResult {
@@ -389,7 +423,6 @@ export default {
         }
       }
     }
-
   }
 
   .backdrop {
@@ -397,7 +430,7 @@ export default {
     width: 100%;
     height: 100vh;
     z-index: 90000;
-    background-color: rgba(0, 0, 0, .4);
+    background-color: rgba(0, 0, 0, 0.4);
   }
 }
 </style>

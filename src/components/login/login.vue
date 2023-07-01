@@ -201,7 +201,7 @@ export default {
       '/captcha', {
     }).then(res => {
       this.captchaID = res.data.data.id
-      this.veriImg = 'http://124.222.30.146:4396/api/front' + res.data.data.img_url
+      this.veriImg = 'https://blogo.revocat.tech/front/' + res.data.data.img_url
     }).catch(Error => {
       this.$store.state.isLogin.Login = false
       this.$Notice.error({
@@ -351,7 +351,7 @@ export default {
         '/captcha', {
       }).then(res => {
         this.captchaID = res.data.data.id
-        this.veriImg = 'http://124.222.30.146:4396/api/front' + res.data.data.img_url
+        this.veriImg = 'https://blogo.revocat.tech/front/' + res.data.data.img_url
       }).catch(Error => {
         this.$store.state.isLogin.Login = false
         this.$Notice.error({
@@ -415,7 +415,7 @@ export default {
         '/captcha', {
       }).then(res => {
         this.captchaID = res.data.data.id
-        this.veriImg = 'http://124.222.30.146:4396/api/front' + res.data.data.img_url
+        this.veriImg = 'https://blogo.revocat.tech/front/' + res.data.data.img_url
       }).catch(Error => {
         this.$store.state.isLogin.Login = false
         this.$Notice.error({

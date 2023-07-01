@@ -147,7 +147,7 @@ export default {
           if (document.documentElement.scrollTop - this.$store.state.articleNumber.indexLength * 325 - 45 > 0) {
             this.$refs.affix.classList.remove('affix1')
             this.$refs.affix.classList.add('affix2')
-            this.$refs.affix.style.top = this.$store.state.articleNumber.indexLength * 325 + 75 + 'px'
+            this.$refs.affix.style.top = this.$store.state.articleNumber.indexLength * 325 + 45 + 'px'
 
           } else if (document.documentElement.scrollTop > this.top - 35) {
             this.$refs.affix.classList.add('affix1')

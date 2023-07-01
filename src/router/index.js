@@ -26,7 +26,7 @@ const routes = [
     component: () => import('@/components/articleDetails/articleDetails.vue'),
     props: true
   },
-  { path: '/404', component: () => import('@/components/404/404.vue') },
+  // { path: '/404', component: () => import('@/components/404/404.vue') },
   { path: '/friends', component: () => import('@/components/friends/friends.vue') },
   { path: '/albums', component: () => import('@/components/albums/albums.vue') },
   { path: '/links', component: () => import('@/components/index/index.vue') },

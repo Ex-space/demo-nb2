@@ -392,10 +392,12 @@ body {
 }
 .forget-container {
   animation: all 1s;
-  height: 100%;
+  height: 100vh;
+  width: 100vw;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   .lizi {
     position: fixed;
     width: 100%;
