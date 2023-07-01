@@ -1,9 +1,9 @@
 <!--  -->
 <template>
-  <div class="foot-container">
+  <a href="https://beian.miit.gov.cn" class="foot-container">
     <span>Copyright ©2023 {{ name }}.All Rights Reserved</span>
     <span>{{ record }}</span>
-  </div>
+  </a>
 </template>
 
 <script>

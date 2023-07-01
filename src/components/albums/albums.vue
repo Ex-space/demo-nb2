@@ -4,14 +4,20 @@
     <normalHeader></normalHeader>
     <div class="bkimg">
       <div class="alltitle">照片墙</div>
-      <img :src=bkimg alt="">
+      <img :src="bkimg" alt="" />
     </div>
     <div class="album self">
       <div class="image" v-for="(item, index) in imgList" :key="item">
-        <div class="tip" ref="tip">
-          点击查看大图
-        </div>
-        <el-image :src=item class="img" :preview-src-list="imgList" @mousemove="tip(index,$event)" @mouseenter="show(index)" @mouseleave="hide(index)" lazy>
+        <div class="tip" ref="tip">点击查看大图</div>
+        <el-image
+          :src="item"
+          class="img"
+          :preview-src-list="imgList"
+          @mousemove="tip(index, $event)"
+          @mouseenter="show(index)"
+          @mouseleave="hide(index)"
+          lazy
+        >
           <div class="loader" slot="placeholder">
             <div class="conta">
               <h3>正在努力寻找图片ing...</h3>
@@ -40,54 +46,79 @@
 </template>
 
 <script>
-import normalHeader from '@/components/normalize/normalize-head.vue'
-import normalFooter from '@/components/normalize/normalize-footer.vue'
+import normalHeader from "@/components/normalize/normalize-head.vue";
+import normalFooter from "@/components/normalize/normalize-footer.vue";
 export default {
   data() {
     return {
       imgList: [],
-      bkimg: '',
+      bkimg: "",
     };
   },
 
   components: {
     normalHeader,
-    normalFooter
+    normalFooter,
   },
-  async created(){
-    this.$http.get(
-      '/page',{
-    }).then(res => {
-      this.bkimg=res.data.data[3]
-    }).catch(Error => {
-    })
-    await this.$http.get(
-      `/photo/list`, {
-      }).then(res => {
-        this.imgList=res.data.data
-    }).catch(Error => {
-    })
+  async created() {
+    this.$http
+      .get("/page", {})
+      .then((res) => {
+        this.bkimg = res.data.data[3];
+      })
+      .catch((Error) => {});
+    await this.$http
+      .get(`/photo/list`, {})
+      .then((res) => {
+        this.imgList = res.data.data;
+        // var request = window.indexedDB.open("imgDatabase");
+        // request.onerror = function error(err) {
+        //   console.error(err);
+        // };
+        // request.onsuccess = function (event) {
+        //   db = event.target.result;
+        // };
+        // request.onupgradeneeded = function (event) {
+        //   // 保存 IDBDataBase 接口
+        //   var db = event.target.result;
+
+        //   // 为该数据库创建一个对象仓库
+        //   var objectStore = db.createObjectStore("image", {
+        //     autoIncrement: true,
+        //   });
+        //   objectStore.createIndex("url", "url", { unique: false });
+        //   console.log(1);
+        //   objectStore.transaction.oncomplete = (e) => {
+        //     // 将数据保存到新创建的对象仓库
+        //     var imageObjectStore = db
+        //       .transaction("image", "readwrite")
+        //       .objectStore("image");
+        //     console.log(this);
+        //     this.imgList.forEach((image) => {
+        //       imageObjectStore.add(image);
+        //     });
+        //   };
+        // };
+      })
+      .catch((Error) => {});
   },
   computed: {},
-  mounted() {
-
-  },
+  mounted() {},
   methods: {
-    tip(index,e) {
-      this.$refs.tip[index].style.left = e.offsetX+5 + 'px';
-      this.$refs.tip[index].style.top= e.offsetY+5 + 'px';
+    tip(index, e) {
+      this.$refs.tip[index].style.left = e.offsetX + 5 + "px";
+      this.$refs.tip[index].style.top = e.offsetY + 5 + "px";
     },
-    show(index){
-      this.$refs.tip[index].style.opacity=1;
+    show(index) {
+      this.$refs.tip[index].style.opacity = 1;
     },
-    hide(index){
-      this.$refs.tip[index].style.opacity=0;
-    }
-  }
-}
-
+    hide(index) {
+      this.$refs.tip[index].style.opacity = 0;
+    },
+  },
+};
 </script>
-<style lang='less' scoped>
+<style lang="less" scoped>
 @keyframes img {
   20% {
     opacity: 0;
@@ -126,7 +157,7 @@ export default {
     transform: translate(-50%);
     margin-top: 200px;
     font-size: 40px;
-    color: white
+    color: white;
   }
 
   img {
@@ -138,7 +169,6 @@ export default {
   from {
     opacity: 0;
     transform: translateY(-200px);
-
   }
 
   to {
@@ -166,8 +196,7 @@ export default {
       @keyframes img {
         from {
           opacity: 0.4;
-          transform: scale(.4);
-
+          transform: scale(0.4);
         }
 
         to {
@@ -184,17 +213,17 @@ export default {
         font-weight: 500;
         padding: 2px 5px;
         width: 85px;
-        border: 1px solid #409EFF;
+        border: 1px solid #409eff;
         border-radius: 5px;
         z-index: 1;
         position: absolute;
-        background-color: #FFF;
+        background-color: #fff;
       }
 
       .img {
         cursor: pointer;
         animation: img 1.5s;
-        transition: all .5s;
+        transition: all 0.5s;
         border-radius: 5px;
         width: 100%;
 
@@ -352,19 +381,19 @@ export default {
     }
   }
 
-  @media (max-width:1200px) {
+  @media (max-width: 1200px) {
     .album {
       column-count: 4;
     }
   }
 
-  @media (max-width:800px) {
+  @media (max-width: 800px) {
     .album {
       column-count: 3;
     }
   }
 
-  @media (max-width:650px) {
+  @media (max-width: 650px) {
     .album {
       column-count: 2;
     }
